@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de Pagamento</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      /* Gradiente verde escuro */
+      background: linear-gradient(135deg, #014d2e, #027a50);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #014d2e;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #027a50;
+    }
+
+    .status {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Verde escuro */
+    .pago {
+      color: #014d2e;
+    }
+
+    .nao-pago {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Consulta de Pagamento</h2>
+    <input type="text" id="nome" placeholder="Digite o nome">
+    <button onclick="consultar()">Consultar</button>
+    <div id="resultado" class="status"></div>
+  </div>
+
+  <script>
+    async function consultar() {
+      const nomeInput = document.getElementById('nome').value.trim().toLowerCase();
+      const resultadoDiv = document.getElementById('resultado');
+
+      try {
+        const response = await fetch('data.json');
+        const dados = await response.json();
+
+        const encontrado = dados.find(p => p.nome.toLowerCase() === nomeInput);
+
+        if (encontrado) {
+          if (encontrado.status === "pago") {
+            resultadoDiv.textContent = "Pagamento em dia";
+            resultadoDiv.className = "status pago";
+          } else {
+            resultadoDiv.textContent = "Pagamento pendente";
+            resultadoDiv.className = "status nao-pago";
+          }
+        } else {
+          resultadoDiv.textContent = "Nome não encontrado";
+          resultadoDiv.className = "status nao-pago";
+        }
+      } catch (error) {
+        resultadoDiv.textContent = "Erro ao carregar dados.";
+        resultadoDiv.className = "status nao-pago";
+      }
+    }
+  </script>
+</body>
+</html>

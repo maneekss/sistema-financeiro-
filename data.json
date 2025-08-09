@@ -1,0 +1,5 @@
+[
+  { "nome": "Emanuel", "status": "pago" },
+  { "nome": "João", "status": "não pago" },
+  { "nome": "Maria", "status": "pago" }
+]
