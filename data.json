@@ -1,5 +1,7 @@
 [
   { "nome": "Emanuel", "status": "pago" },
-  { "nome": "João", "status": "não pago" },
-  { "nome": "Maria", "status": "pago" }
+  { "nome": "Lavinia", "status": "Agosto: Não Pago" },
+  { "nome": "Nathan", "status": "Agosto: Não Pago" },
+  { "nome": "Luiz", "status": "Agosto: Não Pago" },
+  { "nome": "Maria", "status": "Agosto: Não Pago" }
 ]
